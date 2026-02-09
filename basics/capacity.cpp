@@ -7,4 +7,4 @@ int main(){
 
     cout <<setprecision(12)<< a <<endl;
     cout <<setprecision(12)<< b <<endl;
-}
+}  
