@@ -2,8 +2,9 @@
 using namespace std;
 
 char  afterCh( char ch){
+    if(ch == 'z') return 'a';
     return ch+1;
 }
 int main(){
-   cout << afterCh('h') << endl;
+   cout << afterCh('z') << endl;
 }
