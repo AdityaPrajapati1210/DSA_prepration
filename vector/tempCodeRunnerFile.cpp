@@ -1,1 +1,2 @@
-int *arr = new int[size];
+cout << "size : "<<vec.size() <<endl;
+    cout << "capacity : "<<vec.capacity() <<endl;
