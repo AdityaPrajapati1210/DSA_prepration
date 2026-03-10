@@ -2,31 +2,35 @@
 using namespace std;
 
 class Car {
+    public:
     string model;
     string color;
-    public:
+    int *milage;
 
-    // constructor which called automatically when object is created.
     Car(){
         cout << "Object is created" << endl;
     }
 
-    // constructor should be have parameter.
     Car(string model,string color){
         cout<<"uffff garmi....\n";
         this->model = model;
         this->color = color;
+        milage = new int;
+        *milage = 12;
     }
 
-    // getter for access private model and color.
-
-    void getDetails(){
-        cout << "model : "<<model<<endl;
-        cout << "Color : "<<color<<endl;
+    ~Car(){
+        cout << "destructor runs..."<<endl;
+        if(milage != NULL){
+            delete milage;
+            milage = NULL;
+        }
     }
+
 };
 
 int main(){
     Car c1("chutiya" , "white");
-    c1.getDetails();
+    *c1.milage = 32;
+    
 }
