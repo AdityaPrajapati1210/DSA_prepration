@@ -3,7 +3,7 @@ using namespace std;
 
 
 int count(int num){
-    int count = 0;;
+    int count = 0;
     while(num > 0){
 
         int lastDigit = num & 1;
@@ -16,6 +16,6 @@ int count(int num){
 }
 
 int main(){
-    int a = 7;
+    int a = 4;
     cout << count(a) <<endl;
 }
