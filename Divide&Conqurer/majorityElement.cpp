@@ -13,7 +13,7 @@ int main(){
             majority = arr[i];
         }
 
-        if(arr[i] == majority){
+        if(arr[i] == majority){   //main part
             count++;
         }else{
             count--;
