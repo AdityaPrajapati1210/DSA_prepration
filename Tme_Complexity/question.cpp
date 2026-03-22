@@ -1,0 +1,1 @@
+// Time complexity is the measure of the amount of time an algorithm takes to run as a function of the size of the input.
