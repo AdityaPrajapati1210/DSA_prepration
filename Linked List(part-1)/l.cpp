@@ -12,25 +12,56 @@ class Node{
     }
 };
 
-int main(){
-    // Create 4 nodes
-    Node* head = new Node(10);
-    Node* second = new Node(20);
-    Node* third = new Node(30);
-    Node* fourth = new Node(40);
+class List{
+    public:
+    Node *head = NULL;
 
-    // Link nodes
-    head->next = second;
-    second->next = third;
-    third->next = fourth;
-
-    // Print Linked List
-    Node* temp = head;
-    while(temp != NULL){
-        cout << temp->data << " -> ";
-        temp = temp->next;
+    void pushfront(int val){
+        Node *newnode = new Node(val);
+        if(head == NULL){
+            head = newnode;
+        }else{
+            newnode->next = head;
+            head = newnode;
+        }
     }
-    cout << "NULL";
+
+    void pushback(int val){
+        Node *newnode = new Node(val);
+        if(head == NULL){
+            newnode = head;
+        }else{
+            Node*temp = head;
+            while(temp->next != NULL){
+                temp = temp->next;
+            }
+            newnode->next = NULL;
+            temp->next = newnode;
+        }
+    }
+
+
+    // INS
+
+    void print(){
+        Node* temp = head;
+        while(temp != NULL){
+            cout << temp->data << " -> ";
+            temp = temp->next;
+        }
+        cout << "NULL";
+    }
+};
+
+
+
+
+int main(){
+   List abc;
+   abc.pushfront(10);
+   abc.pushfront(20);
+   abc.pushback(20);
+   abc.print();
 
     return 0;
 }
