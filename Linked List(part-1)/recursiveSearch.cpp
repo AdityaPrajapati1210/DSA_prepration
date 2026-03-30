@@ -113,13 +113,20 @@ class List{
         return -1;
     }
 
-    // ~List(){
-    //     cout<<"list"<<endl;
-    //     if(head != NULL){
-    //         delete head;
-    //         head = NULL;
-    //     } 
-    // }
+    // recursive search
+    int searchRec(Node *head,int pos,int target){
+        // base case
+        if(head == NULL){
+            return -1;
+        }
+
+        if(head->data == target){
+            return pos;
+        }else{
+            return searchRec(head->next,pos+1,target);
+        }
+    }
+
 };
 
 
@@ -129,12 +136,11 @@ int main(){
    List abc;
    abc.pushfront(10);
    abc.pushfront(20);
-   abc.pushback(20);
-   abc.insertpos(30,3);
+   abc.pushfront(30);
    abc.pushfront(40);
-   cout<< abc.search(30);
+   cout<< abc.searchRec(abc.head,1,40)<<endl;
 
-//    abc.print();
+   abc.print();
 
     return 0;
 }
