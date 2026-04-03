@@ -25,6 +25,6 @@ bool findDub(string str){
 }
 
 int main(){
-    string str = "((a+b)+(a+b))";
+    string str = "(((a+b)+(a+b)))";
     cout << findDub(str)<< endl;
 }
