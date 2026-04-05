@@ -1,27 +1,19 @@
 #include<iostream>
 #include<queue>
+#include<stack>
 using namespace std;
 
- void rearrangeQueue(queue<int> &q) {
+void reverseQueue(queue<int> &q) {
         // code here
-        int n = q.size();
-        queue<int>first;
-        
-        for(int i=0;i<(n+1)/2;i++){
-            first.push(q.front());
+        stack<int>st;
+        while(!q.empty()){
+            st.push(q.front());
             q.pop();
         }
         
-        while(!first.empty()){
-            int temp = first.front();
-            q.push(temp);
-            first.pop();
-            if(first.empty()){
-                break;
-            }
-            temp = q.front();
-            q.push(temp);
-            q.pop();
+        while(!st.empty()){
+            q.push(st.top());
+            st.pop();
         }
     }
 
@@ -31,7 +23,7 @@ using namespace std;
         for (int i=1;i<10;i++){
             q.push(i);
         }
-        rearrangeQueue(q);
+        reverseQueue(q);
 
         while(!q.empty()){
             cout<<q.front()<<" ";
