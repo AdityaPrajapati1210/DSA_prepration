@@ -4,17 +4,12 @@
 using  namespace std;
 
 int maximumAmount(vector<int>value,vector<int>weight,int w){
-    vector<float>ratio;
-    for(int i=0;i<value.size();i++){
-        ratio.push_back((float)value[i]/weight[i]);
-    }
-    
     vector<pair<int,float>>ratioSort(value.size());
-
     for(int i=0;i<value.size();i++){
         ratioSort[i].first = i;
-        ratioSort[i].second = ratio[i];
+        ratioSort[i].second = (float)value[i]/weight[i];
     }
+    
 
     sort(ratioSort.begin(),ratioSort.end(),[](auto &a ,auto &b){
         return a.second > b.second;
