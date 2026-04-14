@@ -50,7 +50,7 @@ void inorder(Node*root){
 }
 
 int main(){
-    int arr[] = {5,3,6,2,7,9,1};
+    int arr[] = {5,3,6,2,7,9,1,8};
     int n = sizeof(arr)/sizeof(int);
 
     Node *root = builtTree(arr,n);
