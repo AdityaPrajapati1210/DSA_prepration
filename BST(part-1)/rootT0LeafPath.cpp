@@ -1,4 +1,5 @@
 #include<iostream>
+#include<vector>
 using namespace std;
 
 class Node{
@@ -49,10 +50,40 @@ void inorder(Node*root){
     inorder(root->right);
 }
 
+void rootToLeaf(Node* root, vector<vector<int>>& ans, vector<int>& path){
+    if(root == NULL){
+        return;
+    }
+
+    path.push_back(root->data);
+
+    if(root->left == NULL && root->right == NULL){
+        ans.push_back(path);
+    }
+    else{
+        rootToLeaf(root->left, ans, path);
+        rootToLeaf(root->right, ans, path);
+    }
+
+    path.pop_back();
+}
+
+
 int main(){
     int arr[] = {5,3,6,2,7,9,1,8};
     int n = sizeof(arr)/sizeof(int);
 
     Node *root = builtTree(arr,n);
-    inorder(root);
+    // inorder(root);
+    vector<int>path;
+    vector<vector<int>>ans;
+    rootToLeaf(root ,ans,path);
+
+    for(auto v : ans){
+        for(int x : v){
+            cout << x << " ";
+        }
+        cout << endl;
+    }
+    
 }
