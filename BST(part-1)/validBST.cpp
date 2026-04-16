@@ -1,5 +1,4 @@
 #include<iostream>
-#include<vector>
 using namespace std;
 
 class Node{
@@ -50,41 +49,30 @@ void inorder(Node*root){
     inorder(root->right);
 }
 
-void rootToLeaf(Node* root, vector<vector<int>>& ans, vector<int>& path){
-    if(root == NULL){
-        return;
+bool validHelper(Node*root ,Node*min, Node*max){
+    if(root == NULL) return true;
+
+    if(min != NULL && root->data < min->data){
+        return false;
+    }
+    if(max != NULL && root->data > max->data){
+        return false;
     }
 
-    path.push_back(root->data);
-
-    if(root->left == NULL && root->right == NULL){
-        ans.push_back(path);
-        path.pop_back();
-        return;
-    }
-    else{
-        rootToLeaf(root->left, ans, path);
-        rootToLeaf(root->right, ans, path);
-    }
-
-    path.pop_back();
+    return validHelper(root->left ,min,root) && validHelper(root->right,root,max);
 }
 
 
+bool validBST(Node*root){
+    return validHelper(root, NULL,NULL);
+}
+
 int main(){
-    int arr[] = {5,3,4,6,2,7,9,1,8};
+    int arr[] = {5,3,6,2,7,9,1,8};
     int n = sizeof(arr)/sizeof(int);
 
     Node *root = builtTree(arr,n);
     // inorder(root);
-    vector<int>path;
-    vector<vector<int>>ans;
-    rootToLeaf(root ,ans,path);
-    for(auto v : ans){
-        for(int x : v){
-            cout << x << " ";
-        }
-        cout << endl;
-    }
-    
+
+    cout << validBST(root)<<endl;
 }
