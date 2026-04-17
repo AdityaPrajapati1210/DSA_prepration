@@ -26,7 +26,6 @@ Node*insert(Node*root , int val){
     }else{
         root->right = insert(root->right , val);
     }
-
     return root;
 }
 
