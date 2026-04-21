@@ -8,11 +8,11 @@ class Heap{
 
     void push(int val){
         int n = vec.size();
-        if(vec.size() == 0){
+        if(n == 0){
             vec.push_back(val);
         }else{
             vec.push_back(val);
-            int child = n-1;
+            int child = vec.size()-1;
             int parent = (child -1)/2;
             while(child > 0 && parent >= 0 && vec[child] > vec[parent]){
                 swap(vec[child] , vec[parent]);
@@ -45,6 +45,10 @@ int main(){
     h.push(50);
     h.push(2);
     h.push(4);
+    h.push(40);
+    h.push(40);
+    h.push(40);
+    h.push(40);
     h.push(40);
     h.print();
 
