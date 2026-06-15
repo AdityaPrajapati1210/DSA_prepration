@@ -6,18 +6,34 @@ class Heap{
     public:
     vector<int>vec;
 
+    // void push(int val){
+    //     int n = vec.size();
+    //     if(n == 0){
+    //         vec.push_back(val);
+    //     }else{
+    //         vec.push_back(val);
+    //         int child = vec.size()-1;
+    //         int parent = (child -1)/2;
+    //         while(child > 0 && parent >= 0 && vec[child] > vec[parent]){
+    //             swap(vec[child] , vec[parent]);
+    //             child = parent;
+    //             parent = (child -1)/2;
+    //         }
+    //     }
+    // }
+
     void push(int val){
         int n = vec.size();
         if(n == 0){
             vec.push_back(val);
         }else{
             vec.push_back(val);
-            int child = vec.size()-1;
+            int child = n-1;
             int parent = (child -1)/2;
-            while(child > 0 && parent >= 0 && vec[child] > vec[parent]){
-                swap(vec[child] , vec[parent]);
+            while(child >=0 && parent >= 0 && vec[child] > vec[parent]){
+                swap(vec[child],vec[parent]);
                 child = parent;
-                parent = (child -1)/2;
+                parent = (child-1)/2;
             }
         }
     }
