@@ -38,8 +38,33 @@ class Heap{
         }
     }
 
-    void pop(){
+    void heapify(int i){
+        int child1 = 2 *i +1;
+        int child2 = 2 *i +2;
 
+        int maxI = i;
+
+        if(child1 < vec.size() && vec[child1] > vec[maxI]){
+            maxI = child1;
+        }
+        if(child2 < vec.size() && vec[child2] > vec[maxI]){
+            maxI = child2;
+        }
+
+        swap(vec[maxI] , vec[i]);
+        if(maxI != i){
+            heapify(maxI);
+        }
+    };
+
+    void pop(){
+        int n = vec.size();
+        // step-1  swap the parent/root with the last element
+        swap(vec[0],vec[n-1]);
+        // step-2 delete the last node
+        vec.pop_back();
+        // step -3 fix the heap using heapify function
+        heapify(0);
     }
 
     int top(){
@@ -66,6 +91,15 @@ int main(){
     h.push(40);
     h.push(40);
     h.push(40);
+    h.print();
+    h.pop();
+    h.pop();
+    h.pop();
+    h.pop();
+    h.pop();
+    h.pop();
+    h.pop();
+    h.pop();
     h.print();
 
 
