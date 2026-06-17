@@ -3,27 +3,34 @@
 using namespace std;
 
 
-void heapify(vector<int>vec, int i,int n){
+void heapify(vector<int>&vec, int i,int n){
     int l = 2*i+1;
     int r = 2*i+2;
     int maxI = i;
 
-    if(l >= 0 && vec[l] > vec[maxI]){
+    if(l < n && vec[l] > vec[maxI]){
         maxI =l;
     }
-    if(r >= 0 && vec[r] > vec[maxI]){
+    if(r < n && vec[r] > vec[maxI]){
         maxI =r;
     }
-    swap(vec[maxI] ,  vec[i]);
     if(maxI != i){
+        swap(vec[maxI] ,  vec[i]);
         heapify(vec,maxI,n);
     }
 }
 
-void heapSort(vector<int>vec, int n){
-
+void heapSort(vector<int>&vec, int n){
+    // building max heap
     for(int i = (n/2)-1; i>=0;i--){
         heapify(vec,i,n);
+    }
+
+
+    // sorting
+    for(int i = n-1;i>=0;i--){
+        swap(vec[0],vec[i]);
+        heapify(vec,0,i);
     }
 }
 
