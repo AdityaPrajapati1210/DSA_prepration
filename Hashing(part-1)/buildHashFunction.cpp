@@ -15,7 +15,7 @@ public:
     Node(string key,int val){
         this->key = key;
         this->val = val;
-        Node*next = NULL;
+        this->next = NULL;
     }
 
     ~Node(){
@@ -35,7 +35,7 @@ class HashFunc{
 
         int idx= 0;
         for(int i=0;i<n;i++){
-            idx += (key[i] * key[i])%totsize;
+            idx = (idx + key[i] * key[i])%totsize;
         }
         return idx;
 
@@ -57,10 +57,11 @@ public:
     void rehash(){
         Node**oldtable = table;
         int oldsize = totsize;
+        totsize = 2*totsize;
 
-        table = new Node*[2*totsize];
+        table = new Node*[totsize];
 
-        for(int i=0;i<oldsize;i++){
+        for(int i=0;i<totsize;i++){
             table[i] = NULL;
         }
 
@@ -85,31 +86,74 @@ public:
         Node* head = table[idx];
 
         newNode->next = head;
-        newNode = head;
+        table[idx] = newNode;
 
         currsize++;
 
 
-        int lamda = currsize/(double)totsize;
+        double lamda = currsize/(double)totsize;
         if(lamda > 1){
             rehash();
         }
     }
 
-    void eraise(string key){ 
+    bool exists(string key){
+        int idx = HashFunction(key);
 
+        Node*temp = table[idx];
+        while (temp != NULL){
+            if(temp->key == key){
+                return true;
+            }
+            temp= temp->next;
+        }
+        return false;
     }
 
-    void find(string key){
+    void eraise(string key){
+        if(exists(key)){
+            int idx = HashFunction(key);
+            Node *temp = table[idx];
+            Node*prev = NULL;
+            while (temp != NULL){
+                if(temp->key == key){
+                    if(prev == NULL){
+                        table[idx] = temp->next;
+                    }else{
+                        prev->next = temp->next;
+                    }
+                    temp->next = NULL;
+                    delete temp;
+                    break;
+                }
+            prev = temp;
+            temp= temp->next;
+            }
+        }
+    }
 
+    int search(string key){
+        if(exists(key)){
+
+            int idx = HashFunction(key);
+
+            Node*temp = table[idx];
+            while (temp != NULL){
+                if(temp->key == key){
+                    return temp->val;
+                }
+                temp= temp->next;
+            }
+        }
+        return -1;
     }
 };
 
 int main(){
     HashFunc obj(5);
-    obj.insert("Adiyta",20);
-    obj.find("Aditya");
-    obj.eraise("Adiyta");
+    obj.insert("Aditya",20);
+    cout<<obj.search("Aditya");
+    // obj.eraise("Adiyta");
 
     
 
