@@ -33,6 +33,8 @@ int main(){
     while(!pq.empty()){
         cout << pq.top().first <<"   "<<pq.top().second<<endl;
         pq.pop();
-    }
 
+    }
 }
+
+
