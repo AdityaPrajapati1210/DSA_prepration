@@ -83,9 +83,8 @@ public:
         int idx = HashFunction(key);
 
         Node* newNode = new Node(key ,val);
-        Node* head = table[idx];
 
-        newNode->next = head;
+        newNode->next = table[idx];
         table[idx] = newNode;
 
         currsize++;
@@ -151,9 +150,15 @@ public:
 
 int main(){
     HashFunc obj(5);
-    obj.insert("Aditya",20);
-    cout<<obj.search("Aditya");
-    // obj.eraise("Adiyta");
+    obj.insert("India",150);
+    obj.insert("China",150);
+    obj.insert("Italy",20);
+    obj.insert("Japan",30);
+    
+
+    if(obj.exists("India")){
+        cout<<obj.search("India");
+    }
 
     
 
