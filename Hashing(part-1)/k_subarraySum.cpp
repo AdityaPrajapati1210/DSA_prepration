@@ -3,7 +3,7 @@
 #include<unordered_map>
 using namespace std;
 
-int maxSubbarray(vector<int>& arr) {
+int maxSubbarray(vector<int> arr ,int k) {
         // code here
         
         unordered_map<int,int>mp;
@@ -11,11 +11,10 @@ int maxSubbarray(vector<int>& arr) {
         int maxlength = 0;
         for(int j=0;j<arr.size();j++){
             sum+=arr[j];
-            if(sum == 0){
-                
+            if(sum == k){
                 maxlength = j+1;
             }
-            if(mp.count(sum)){
+            if(mp.count(sum-k)){
                 int length = j - mp[sum];
                 maxlength = max(maxlength ,length);
             }else{
