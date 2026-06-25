@@ -8,22 +8,23 @@ int maxSubbarray(vector<int> arr ,int k) {
         
         unordered_map<int,int>mp;
         int sum =0;
-        int maxlength = 0;
+        int ans = 0;
+        mp[0]=1;
         for(int j=0;j<arr.size();j++){
             sum+=arr[j];
-            if(sum == k){
-                maxlength = j+1;
-            }
+
             if(mp.count(sum-k)){
-                int length = j - mp[sum];
-                maxlength = max(maxlength ,length);
+                ans+=mp[sum-k];
+            }
+
+            if(mp.count(sum) == k){
+                mp[sum]++;
             }else{
-                mp[sum] = j;
+                mp[sum] = 1;
             }
         }
         
-        
-        return maxlength;
+        return ans;
 }
 
 int main(){
