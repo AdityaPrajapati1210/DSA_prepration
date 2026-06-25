@@ -146,6 +146,19 @@ public:
         }
         return -1;
     }
+
+
+    void print(){
+        for(int i=0;i<totsize;i++){
+            cout<<"idx"<<i<<"-> ";
+            Node *temp = table[i];
+            while(temp != NULL){
+                cout<<"("<<temp->key<<","<<temp->val<<") ->";
+                temp = temp->next;
+            }
+            cout<<endl;
+        }
+    }
 };
 
 int main(){
@@ -155,11 +168,5 @@ int main(){
     obj.insert("Italy",20);
     obj.insert("Japan",30);
     
-
-    if(obj.exists("India")){
-        cout<<obj.search("India");
-    }
-
-    
-
+    obj.print();
 }
