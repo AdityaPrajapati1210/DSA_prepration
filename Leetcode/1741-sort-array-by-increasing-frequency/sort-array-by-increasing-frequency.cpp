@@ -12,27 +12,16 @@ public:
             }
         }
 
-        for(auto i : mp){
-            vec.push_back(make_pair(i.first,i.second));
-        }
+        sort(nums.begin(), nums.end(),
+            [&](int a, int b){
 
-        sort(vec.begin(), vec.end(),
-            [](pair<int,int> a, pair<int,int> b){
-
-                if(a.second == b.second){
-                    return a.first > b.first;
+                if(mp[a] == mp[b]){
+                    return a > b;
                 }
-
-                return a.second < b.second;
+                return mp[a] < mp[b];
             });
-        vector<int>ans;
-        for(int i=0;i<vec.size();i++){
-            for(int j=0;j<vec[i].second;j++){
-                ans.push_back(vec[i].first);
-            }
-        }
 
 
-        return ans;
+        return nums;
     }
 };
