@@ -45,10 +45,7 @@ public:
                 return false;
             }
         }
-        if(temp->endofchar){
-            return true;
-        }
-        return false;
+        return temp->children;
     }
 };
 
