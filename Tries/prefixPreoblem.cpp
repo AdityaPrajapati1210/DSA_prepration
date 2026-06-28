@@ -4,65 +4,75 @@
 #include<unordered_map>
 using namespace std;
 
-    class Node {
-    public:
-        unordered_map<char, Node*> children;
-        bool endofchar;
-        int freq;
+class Node{
+public:
 
-        Node() {
-            endofchar = false;
-            freq = 0;
+    unordered_map<char,Node*>children;
+    bool endofchar;
+    int freq;
+
+    Node(){
+        endofchar = false;
+        freq = 0;
+    }
+};
+
+class Tries{
+public:
+
+    Node*root;
+
+    Tries(){
+        root = new Node();
+    }
+
+    void insert(string key){
+        Node*temp = root;
+
+        for(char i : key){
+            if(temp->children.count(i) == 0){
+                temp->children[i] = new Node();
+            }
+            temp = temp->children[i];
+            temp->freq++;
         }
-    };
+        temp->endofchar = true;
+    }
 
-    class Tries {
-    public:
-        Node* root;
+    bool search(string key){
+        Node*temp = root;
 
-        Tries() {
-            root = new Node();
-        }
-
-        void insert(string key) {
-            Node* temp = root;
-
-            for(char ch : key) {
-                if(temp->children.count(ch) == 0) {
-                    temp->children[ch] = new Node();
-                }
-
-                temp = temp->children[ch];
-                temp->freq++;
+        for(char i : key){
+            if(temp->children.count(i) == 0){
+                return false;
+            }else{
+                temp = temp->children[i];
             }
 
-            temp->endofchar = true;
         }
+        return temp->endofchar;
+    }
 
-        vector<string> prefixs(vector<string>& arr) {
-            vector<string> ans;
+    vector<string>prefixs(vector<string> &arr){
+        vector<string>ans;
+        
+        for(string key: arr){
+            Node * temp = root;
+            temp = temp->children[key[0]];
 
-            for(string key : arr) {
-                Node* temp = root;
-                string prefix = "";
-
-                for(char ch : key) {
-                    prefix += ch;
-                    temp = temp->children[ch];
-
-                    if(temp->freq == 1) {
-                        ans.push_back(prefix);
-                        break;
-                    }
-                }
+            for(int j=1;j<key.length();j++){
                 if(temp->freq > 1){
-                    ans.push_back(key);
+                    temp = temp->children[key[j]];
+                }else{
+                    ans.push_back(key.substr(0,j));
+                    break;
                 }
             }
-
-            return ans;
         }
-    };
+
+        return ans;
+    }
+};
 
 int main(){
 
