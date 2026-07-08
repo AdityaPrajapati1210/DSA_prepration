@@ -53,8 +53,6 @@ class Graph{
             }
         }
     }
-
-
 };
 
 int main(){
@@ -71,7 +69,7 @@ int main(){
     // Component 3
     graph.addEdge(7,8);
     graph.addEdge(8,9);
-    // graph.print();
+    graph.print();
 
     graph.dfs();
 }
