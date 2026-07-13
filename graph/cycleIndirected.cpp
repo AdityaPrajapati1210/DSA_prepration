@@ -1,89 +1,41 @@
-#include <iostream>
-#include <vector>
-#include <list>
+#include<iostream>
+#include<vector>
+#include<list>
 using namespace std;
 
-class Graph
-{
-public:
-    int V;
+class Graph {
+    public:
     list<int> *l;
+    int V;
 
-    Graph(int V)
-    {
+    Graph(int V){
         this->V = V;
-        l = new list<int>[V];
-    }
+        l = new list<int> [V];
+    };
 
-    void addEdge(int u, int v)
-    {
+    void addEdge(int u , int v){
         l[u].push_back(v);
-        // l[v].push_back(u); for directed graph
     }
 
-    void print()
-    {
-        for (int i = 0; i < V; i++)
-        {
-            cout << i << " -> ";
-            for (int x : l[i])
-            {
-                cout << x << " ";
+    void print(){
+        for(int i=0;i<V;i++){
+            cout << i << "->";
+            for(auto it : l[i]){
+                cout << it << " ";
             }
-            cout << endl;
-        }
-    }
-
-    bool helper(vector<bool> &vis, int node, int parent)
-    {
-
-        vis[node] = true;
-
-        for (int neighbour : l[node]){
-
-            if (!vis[neighbour]){
-                if (helper(vis, neighbour, node))
-                    return true;
-            }else{
-                return true;
-            }
+            cout <<endl;
         }
 
-        return false;
     }
 
-    bool detectCycle(){
 
-        vector<bool> vis(V, false);
-        for (int i = 0; i < V; i++){
-
-            if (!vis[i]){
-
-                if (helper(vis, i, -1))
-                    return true;
-            }
-        }
-
-        return false;
-    }
 };
 
-int main()
-{
-
-    Graph graph(3);
-
-    graph.addEdge(0, 1);
-    graph.addEdge(1, 2);
-    graph.addEdge(2, 0);
-
-
-    graph.print();
-
-    if (graph.detectCycle())
-        cout << "\nCycle Present";
-    else
-        cout << "\nCycle Not Present";
-
-    return 0;
+int main(){
+    Graph gh(3);
+    gh.addEdge(0,1);
+    gh.addEdge(1,2);
+    gh.addEdge(2,0);
+    gh.print();
 }
+
