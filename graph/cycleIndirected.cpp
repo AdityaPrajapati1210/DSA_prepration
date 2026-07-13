@@ -18,7 +18,7 @@ public:
     void addEdge(int u, int v)
     {
         l[u].push_back(v);
-        l[v].push_back(u);
+        // l[v].push_back(u); for directed graph
     }
 
     void print()
@@ -44,7 +44,7 @@ public:
             if (!vis[neighbour]){
                 if (helper(vis, neighbour, node))
                     return true;
-            }else if (neighbour != parent){
+            }else{
                 return true;
             }
         }
@@ -71,18 +71,12 @@ public:
 int main()
 {
 
-    Graph graph(10);
+    Graph graph(3);
 
-    graph.addEdge(2, 9);
-    graph.addEdge(7, 8);
-    graph.addEdge(5, 9);
-    graph.addEdge(7, 2);
-    graph.addEdge(3, 8);
-    graph.addEdge(2, 8);
-    graph.addEdge(1, 6);
-    graph.addEdge(3, 0);
-    graph.addEdge(7, 0);
-    graph.addEdge(8, 5);
+    graph.addEdge(0, 1);
+    graph.addEdge(1, 2);
+    graph.addEdge(2, 0);
+
 
     graph.print();
 
