@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <list>
-#include <stack>
+#include <queue>
 using namespace std;
 
 class Graph
@@ -34,39 +34,45 @@ public:
         }
     }
 
-    void helper(int src, stack<int> &s, vector<bool> &vis)
-    {
-        vis[src] = true;
 
-        list<int> neb = l[src];
-        for (auto i : neb)
-        {
-            if (!vis[i])
-            {
-                helper(i, s, vis);
+    void calindeg(vector<int>&indeg){
+        for(int i=0;i<V;i++){
+            list<int>neb = l[i];
+            for(int v : neb){
+                indeg[v]++;
             }
         }
-        s.push(src);
     }
 
-    void topelogicalSorting()
-    {
-        stack<int> s;
-        vector<bool> vis(6, false);
-        for (int i = 0; i < 6; i++)
-        {
-            if (!vis[i])
-            {
-                helper(i, s, vis);
+    void topelogicalSorting(){
+        // kaha's ALgorihtm
+        vector<int>indeg(V,0);
+        queue<int>q;
+
+        calindeg(indeg);
+
+        for(int i=0;i<V;i++){
+            if(indeg[i] == 0){
+                q.push(i);
+                cout<<i<<" ";
             }
         }
 
-        while (!s.empty())
-        {
-            cout << s.top() << " ";
-            s.pop();
+        while(!q.empty()){
+            int curr = q.front();
+            q.pop();
+
+            list<int>neb = l[curr];
+            for(auto v : neb){
+                indeg[v]--;
+                if(indeg[v] == 0){
+                    q.push(v);
+                    cout <<v << " ";
+                }
+            }
         }
     }
+   
 };
 
 int main()
