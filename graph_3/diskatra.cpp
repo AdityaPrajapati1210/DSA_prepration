@@ -50,6 +50,7 @@ int main(){
     graph[0].push_back(Edge(2,4));
 
     graph[1].push_back(Edge(2,1));
+    graph[1].push_back(Edge(0,2));
     graph[1].push_back(Edge(3,7));
 
     graph[2].push_back(Edge(4,3));
@@ -60,5 +61,5 @@ int main(){
     graph[4].push_back(Edge(2,5));
 
 
-    dijkstra(0,graph,6,5);
+    dijkstra(1,graph,6,2);
 }
