@@ -18,5 +18,5 @@ int helper(vector<int>arr, int i, int j){
 
 int main(){
     vector<int> arr = {1,2,3,4,3};
-    cout <<helper(arr,,arr.size()-1);
+    cout <<helper(arr,1,arr.size()-1);
 }
