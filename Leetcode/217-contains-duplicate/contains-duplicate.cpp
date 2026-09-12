@@ -6,18 +6,11 @@ public:
 
         for(int i=0;i<n;i++){
             if(freq.find(nums[i]) != freq.end()){
-                freq[nums[i]]++;
+                return true;
             }else{
                 freq[nums[i]] = 1;
             }
         }
-
-        for(auto i : freq){
-            if(i.second > 1){
-                return true;
-            }
-        }
-
         return false;
     }
 };
